@@ -1,0 +1,47 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Vals' personal website" } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <nav>
+      <a class="site-name" href="/">vals.quest</a>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/activities">Activities</a></li>
+        <li><a href="/conversations">Conversations</a></li>
+        <li><a href="/manifesto">Manifesto</a></li>
+        <li><a href="/rpg">RPG</a></li>
+      </ul>
+    </nav>
+    <main>
+      <slot />
+    </main>
+    <footer>
+      <ul class="contact-links">
+        <li><a href="mailto:tutor.vals@gmail.com">email</a></li>
+        <li><a href="https://x.com/TutorVals">X</a></li>
+        <li><a href="https://tutorvals.substack.com">Substack</a></li>
+        <li><a href="https://www.lesswrong.com/users/tutor-vals">LessWrong</a></li>
+      </ul>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  @import '../styles/global.css';
+</style>
