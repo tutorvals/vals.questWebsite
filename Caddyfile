@@ -1,0 +1,4 @@
+vals.quest, www.vals.quest {
+	root * /var/www/vals.quest
+	file_server
+}
