@@ -1,0 +1,39 @@
+---
+layout: ../layouts/Base.astro
+title: vals.quest
+---
+
+# Jonathan / Tutor Vals
+
+*In a permanent state of unpolished draft.*
+
+## Some background bio
+
+Born in southern France from two british parents, grew up in the countryside, on a farm, with 2 older brothers, 1 older sister.
+
+Went to engineering school, where I spent a lot of time learning amazing hobbies, eg. film, improv theatre, couple dance, improv music, event logistics, photography, esports, video game development (I still really like design).
+
+Lived in Toulouse, Barcelona, London, Paris.
+
+## Now (2024-2026)
+
+I make money teaching AI Safety and through other AI Safety work.
+
+I default live in Paris (eg. half of the year) and frequently visit Amsterdam, Berlin, London, Toulouse, US west coast (SF and Portland/Seattle).
+
+I work part time so otherwise travel to hang out with people, solve impractical and practical problems (how to be happy, how to live well, how to accomplish yourself, how to fix a door).
+
+## The pitch
+
+> "a very smart mathy person who has also done a lot of meditation and life coaching"
+
+On my self evaluation I feel like that's too kind on all points, but it's a great description because it captures things that stand out about me. I'm not very knowledgeable math wise, (probably only equivalent of 3 years of graduate study), nor meditation wise (100 to 200h?), nor do I have 10 years of pro coaching experience. But I think these are all good vectors to understand me! I like for some things to be precise (legibility ≠ precision, ie. an ambiguous complex poem can yet be precise).
+
+I am surprisingly good at many things (eg. got top 1% in many games in many genres).
+
+## Explore
+
+- [Activity menu](/activities) — things I like doing
+- [Conversation menu](/conversations) — things I like talking about
+- [2026 Manifesto](/manifesto) — current visions
+- [Roleplay games](/rpg) — systems I GM

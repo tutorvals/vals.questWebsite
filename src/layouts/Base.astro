@@ -1,10 +1,14 @@
 ---
 interface Props {
-  title: string;
+  title?: string;
   description?: string;
+  frontmatter?: { title?: string; description?: string };
 }
 
-const { title, description = "Vals' personal website" } = Astro.props;
+// Markdown pages pass title/description via frontmatter; .astro pages pass them directly
+const fm = Astro.props.frontmatter ?? {};
+const title = Astro.props.title ?? fm.title ?? 'vals.quest';
+const description = Astro.props.description ?? fm.description ?? "Vals' personal website";
 ---
 
 <html lang="en">

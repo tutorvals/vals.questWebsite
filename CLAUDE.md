@@ -16,7 +16,10 @@ Personal website at https://vals.quest
 - `./sudo-disable.sh` — revokes it
 - Run enable before a session that needs root (e.g. installing packages, firewall changes), disable after
 
+## Content vs form
+Pages can be plain Markdown: `src/pages/<name>.md` with a 3-line frontmatter (`layout: ../layouts/Base.astro` + `title:`). Vals edits the words in the `.md` body only; style/structure lives in `src/layouts/Base.astro` and `src/styles/global.css`. Prefer converting `.astro` pages to `.md` when touching their content. `src/drafts/` holds unpublished pages (not built).
+
 ## Key files
-- `src/pages/` — Astro pages
+- `src/pages/` — Astro pages (`.astro` or `.md`)
 - `Caddyfile` — web server config (deployed to `/etc/caddy/Caddyfile`)
 - `deploy.sh` — build + deploy script
