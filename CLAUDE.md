@@ -4,7 +4,7 @@ Personal website at https://vals.quest
 
 ## Stack
 - **Framework**: Astro (TypeScript), static output
-- **Server**: Caddy (automatic HTTPS) on Hetzner VPS (Ubuntu 24.04, `77.42.16.53`)
+- **Server**: Caddy (automatic HTTPS) on Hetzner VPS (Ubuntu 24.04, `167.233.85.125`)
 - **Domain**: vals.quest (Porkbun)
 
 ## Commands
@@ -22,4 +22,16 @@ Pages can be plain Markdown: `src/pages/<name>.md` with a 3-line frontmatter (`l
 ## Key files
 - `src/pages/` — Astro pages (`.astro` or `.md`)
 - `Caddyfile` — web server config (deployed to `/etc/caddy/Caddyfile`)
-- `deploy.sh` — build + deploy script
+- `deploy.sh` — build + deploy script (runs on VPS)
+
+## Deployment (VPS: vals@167.233.85.125)
+
+Remote path: `~/vals.questWebsite`
+Origin: `git@github.com:tutorvals/vals.questWebsite.git`
+
+### Deploy steps (from local)
+1. Push: `git push` (from local vals.questWebsite/)
+2. Pull on VPS: `ssh vals@167.233.85.125 "cd ~/vals.questWebsite && git pull"`
+3. Build + deploy on VPS: `ssh vals@167.233.85.125 "cd ~/vals.questWebsite && npm run build && rsync -a --delete dist/ /var/www/vals.quest/"`
+
+Note: `deploy.sh` does steps 2-3 but must be run on the VPS directly.

@@ -3,9 +3,7 @@ layout: ../layouts/Base.astro
 title: vals.quest
 ---
 
-# Jonathan / Tutor Vals
-
-*In a permanent state of unpolished draft.*
+# Jonathan / Vals
 
 ## Some background bio
 
@@ -15,17 +13,17 @@ Went to engineering school, where I spent a lot of time learning amazing hobbies
 
 Lived in Toulouse, Barcelona, London, Paris.
 
-## Now (2024-2026)
+## Current (2024-2026)
 
 I make money teaching AI Safety and through other AI Safety work.
 
-I default live in Paris (eg. half of the year) and frequently visit Amsterdam, Berlin, London, Toulouse, US west coast (SF and Portland/Seattle).
+I spend the plurality of my time in Paris, and frequently visit Amsterdam, Berlin, London, Toulouse, US west coast (SF and Portland/Seattle).
 
 I work part time so otherwise travel to hang out with people, solve impractical and practical problems (how to be happy, how to live well, how to accomplish yourself, how to fix a door).
 
-## The pitch
+## A pitch
 
-> "a very smart mathy person who has also done a lot of meditation and life coaching"
+> "a very smart mathy person who has also done a lot of meditation and life coaching" - [another smart mathy parson]
 
 On my self evaluation I feel like that's too kind on all points, but it's a great description because it captures things that stand out about me. I'm not very knowledgeable math wise, (probably only equivalent of 3 years of graduate study), nor meditation wise (100 to 200h?), nor do I have 10 years of pro coaching experience. But I think these are all good vectors to understand me! I like for some things to be precise (legibility ≠ precision, ie. an ambiguous complex poem can yet be precise).
 
