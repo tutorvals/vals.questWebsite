@@ -5,29 +5,36 @@ title: vals.quest
 
 # Jonathan / Vals
 
-## Some background bio
+## Background
 
-Born in southern France from two british parents, grew up in the countryside, on a farm, with 2 older brothers, 1 older sister.
+Born & raised on a farm in southern France, british parents, 2 older brothers & 1 older sister. 
 
-Went to engineering school, where I spent a lot of time learning amazing hobbies, eg. film, improv theatre, couple dance, improv music, event logistics, photography, esports, video game development (I still really like design).
+Studied general Math Physics Engineering, specialized in Networks & Telecommunications. 
 
-Lived in Toulouse, Barcelona, London, Paris.
+Worked in software engineering then transitioned to AI Safety. 
 
 ## Current (2024-2026)
 
-I make money teaching AI Safety and through other AI Safety work.
+I write, advise and teach about AI Safety, notably threat models and strategy.
 
-I spend the plurality of my time in Paris, and frequently visit Amsterdam, Berlin, London, Toulouse, US west coast (SF and Portland/Seattle).
+I help friends & strangers have good lives, by being cool and building community.
 
-I work part time so otherwise travel to hang out with people, solve impractical and practical problems (how to be happy, how to live well, how to accomplish yourself, how to fix a door).
+I"m mostly in Paris, Amsterdam, Berlin, London, Toulouse, and the US west coast (Bay Area, and Portland/Seattle).
 
-## A pitch
+## What they say about me
 
-> "a very smart mathy person who has also done a lot of meditation and life coaching" - [another smart mathy parson]
+> "a very smart mathy person who has also done a lot of meditation and life coaching" - [ a smart mathy parson ]
 
-On my self evaluation I feel like that's too kind on all points, but it's a great description because it captures things that stand out about me. I'm not very knowledgeable math wise, (probably only equivalent of 3 years of graduate study), nor meditation wise (100 to 200h?), nor do I have 10 years of pro coaching experience. But I think these are all good vectors to understand me! I like for some things to be precise (legibility ≠ precision, ie. an ambiguous complex poem can yet be precise).
+That's too kind on all points, but it captures things that stand out about me. I only have a few years experience in these domains, but often seem like I have much more. 
+I am surprisingly good at many things and seem to learn quite fast.
 
-I am surprisingly good at many things (eg. got top 1% in many games in many genres).
+> "autistic" - [ person I met in southeast asia ]
+
+I like for some things to be precise (legibility ≠ precision, ie. an ambiguous complex poem can yet be precise). I do care about truthiness, but even moreso about Winning.
+
+> "fuck you" - [ friend who trusts me to recognize their jokes in text ]
+
+I love you too.
 
 ## Explore
 
