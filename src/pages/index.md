@@ -19,11 +19,11 @@ I write, advise and teach about AI Safety, notably threat models and strategy.
 
 I help friends & strangers have good lives, by being cool and building community.
 
-I"m mostly in Paris, Amsterdam, Berlin, London, Toulouse, and the US west coast (Bay Area, and Portland/Seattle).
+I'm mostly in Paris, Amsterdam, Berlin, London, Toulouse, and the US west coast (Bay Area, and Portland/Seattle).
 
 ## What they say about me
 
-> "a very smart mathy person who has also done a lot of meditation and life coaching" - [ a very smart mathy parson ]
+> "a very smart mathy person who has also done a lot of meditation and life coaching" - [ a very smart mathy person ]
 
 Too kind, but captures things that stand out about me. I only have a few years experience in these domains, but often seem like I have much more. 
 

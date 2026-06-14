@@ -3,6 +3,16 @@ layout: ../layouts/Base.astro
 title: 2026 Manifesto - vals.quest
 ---
 
+# Vals 2026 July-Septembre : The Priest
+
+I've started describing aspects of what I do as priest-like. I don't mean by that to 
+
+
+
+
+
+
+
 # Vals 2026 Jan-March Manifesto
 
 ## Some visions for myself
