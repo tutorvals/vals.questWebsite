@@ -45,7 +45,10 @@ On my end, I was trying to absorb 1/10th of her energy. I think we both got a lo
 
 ## Explore
 
+- [Get in touch](/meet) — book a call / work with me
 - [Activity menu](/activities) — things I like doing
 - [Conversation menu](/conversations) — things I like talking about
 - [2026 Manifesto](/manifesto) — current visions
 - [Roleplay games](/rpg) — systems I GM
+- [Hire a Vals](/hireme) — what I do & how to compensate
+- [Reading](/reading) — what I'm reading
