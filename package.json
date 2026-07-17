@@ -7,7 +7,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "build:travels": "node scripts/build-travels.mjs"
+    "build:travels": "node scripts/build-travels.mjs",
+    "build:vibes": "node scripts/build-vibes.mjs"
   },
   "dependencies": {
     "astro": "^5.17.1",
@@ -15,6 +16,7 @@
     "three": "^0.180.0"
   },
   "devDependencies": {
+    "image-size": "^2.0.2",
     "js-yaml": "^4.1.0"
   }
 }
