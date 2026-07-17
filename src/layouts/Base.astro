@@ -2,6 +2,7 @@
 interface Props {
   title?: string;
   description?: string;
+  wide?: boolean;
   frontmatter?: { title?: string; description?: string };
 }
 
@@ -9,6 +10,8 @@ interface Props {
 const fm = Astro.props.frontmatter ?? {};
 const title = Astro.props.title ?? fm.title ?? 'vals.quest';
 const description = Astro.props.description ?? fm.description ?? "Vals' personal website";
+// `wide` lets a page (e.g. the travels globe) break out of the 800px column.
+const wide = Astro.props.wide ?? false;
 ---
 
 <html lang="en">
@@ -31,9 +34,10 @@ const description = Astro.props.description ?? fm.description ?? "Vals' personal
         <li><a href="/hireme">Hire</a></li>
         <li><a href="/activities">Activities</a></li>
         <li><a href="/conversations">Conversations</a></li>
+        <li><a href="/travels">Travels</a></li>
       </ul>
     </nav>
-    <main>
+    <main class={wide ? 'wide' : undefined}>
       <slot />
     </main>
     <footer>

@@ -1,0 +1,549 @@
+{
+  "generatedAt": "2026-07-17T14:01:45.122Z",
+  "minTs": 1530835200000,
+  "maxTs": 1783641600000,
+  "stays": [
+    {
+      "id": "London-2018-07",
+      "place": "London",
+      "country": "UK",
+      "lat": 51.5074,
+      "lng": -0.1278,
+      "purpose": [
+        "live",
+        "work"
+      ],
+      "startTs": 1530835200000,
+      "start": "2018-07-06",
+      "endTs": 1538870400000,
+      "end": "2018-10-07",
+      "ongoing": false
+    },
+    {
+      "id": "Scotland-2018-10",
+      "place": "Scotland&Isle-of-Skye",
+      "country": "UK",
+      "lat": 57.2736,
+      "lng": 6.215,
+      "purpose": [
+        "holiday"
+      ],
+      "startTs": 1539043200000,
+      "start": "2018-10-09",
+      "endTs": 1539475200000,
+      "end": "2018-10-14",
+      "ongoing": false
+    },
+    {
+      "id": "nice-2019-01",
+      "place": "nice",
+      "country": "France",
+      "lat": 43.7031,
+      "lng": 7.26608,
+      "purpose": [
+        "holiday"
+      ],
+      "startTs": 1547424000000,
+      "start": "2019-01-14",
+      "endTs": 1547856000000,
+      "end": "2019-01-19",
+      "ongoing": false
+    },
+    {
+      "id": "laRochelle-2019-04",
+      "place": "laRochelle",
+      "country": "France",
+      "lat": 46.1591,
+      "lng": 1.1517,
+      "purpose": [
+        "holiday"
+      ],
+      "startTs": 1555977600000,
+      "start": "2019-04-23",
+      "endTs": 1556236800000,
+      "end": "2019-04-26",
+      "ongoing": false
+    },
+    {
+      "id": "bristol-2019-07",
+      "place": "bristol",
+      "country": "UK",
+      "lat": 51.4545,
+      "lng": -2.5879,
+      "purpose": [
+        "holiday"
+      ],
+      "startTs": 1564012800000,
+      "start": "2019-07-25",
+      "endTs": 1564444800000,
+      "end": "2019-07-30",
+      "ongoing": false
+    },
+    {
+      "id": "chili-2019-10",
+      "place": "Santiago",
+      "country": "Chile",
+      "lat": -33.447487,
+      "lng": -70.673676,
+      "purpose": [
+        "holiday"
+      ],
+      "startTs": 1570147200000,
+      "start": "2019-10-04",
+      "endTs": 1571184000000,
+      "end": "2019-10-16",
+      "ongoing": false
+    },
+    {
+      "id": "portugal-2020-03",
+      "place": "porto",
+      "country": "Portugal",
+      "lat": 41.1579,
+      "lng": -8.6291,
+      "purpose": [
+        "holiday"
+      ],
+      "startTs": 1583712000000,
+      "start": "2020-03-09",
+      "endTs": 1584230400000,
+      "end": "2020-03-15",
+      "ongoing": false
+    },
+    {
+      "id": "paris-2020-07",
+      "place": "paris",
+      "country": "France",
+      "lat": 48.8567,
+      "lng": 2.3522,
+      "purpose": [
+        "live",
+        "work"
+      ],
+      "startTs": 1594166400000,
+      "start": "2020-07-08",
+      "endTs": 1603324800000,
+      "end": "2020-10-22",
+      "ongoing": false
+    },
+    {
+      "id": "colioure-2021-06",
+      "place": "colioure",
+      "country": "France",
+      "lat": 42.526752,
+      "lng": 3.084631,
+      "purpose": [
+        "holiday"
+      ],
+      "startTs": 1623369600000,
+      "start": "2021-06-11",
+      "endTs": 1623542400000,
+      "end": "2021-06-13",
+      "ongoing": false
+    },
+    {
+      "id": "martinique-2022-04",
+      "place": "Martinique",
+      "country": "France",
+      "lat": 14.6,
+      "lng": -61.083302,
+      "purpose": [
+        "holiday"
+      ],
+      "startTs": 1650585600000,
+      "start": "2022-04-22",
+      "endTs": 1651881600000,
+      "end": "2022-05-07",
+      "ongoing": false
+    },
+    {
+      "id": "berlin-2024-02",
+      "place": "Berlin",
+      "country": "Germany",
+      "lat": 52.52,
+      "lng": 13.405,
+      "purpose": [
+        "personal"
+      ],
+      "startTs": 1708905600000,
+      "start": "2024-02-26",
+      "endTs": 1709510400000,
+      "end": "2024-03-04",
+      "ongoing": false
+    },
+    {
+      "id": "budapest-2024-05",
+      "place": "Budapest",
+      "country": "Hungary",
+      "lat": 47.4979,
+      "lng": 19.0402,
+      "purpose": [
+        "personal"
+      ],
+      "startTs": 1714608000000,
+      "start": "2024-05-02",
+      "endTs": 1714953600000,
+      "end": "2024-05-06",
+      "ongoing": false
+    },
+    {
+      "id": "milan-2024-05",
+      "place": "Milan",
+      "country": "Italy",
+      "lat": 45.4642,
+      "lng": 9.19,
+      "purpose": [
+        "personal"
+      ],
+      "startTs": 1714953600000,
+      "start": "2024-05-06",
+      "endTs": null,
+      "end": null,
+      "ongoing": true
+    },
+    {
+      "id": "sao-paulo-2024-07",
+      "place": "São Paulo",
+      "country": "Brazil",
+      "lat": -23.5505,
+      "lng": -46.6333,
+      "purpose": [
+        "personal"
+      ],
+      "startTs": 1721088000000,
+      "start": "2024-07-16",
+      "endTs": 1722902400000,
+      "end": "2024-08-06",
+      "ongoing": false
+    },
+    {
+      "id": "milan-2024-08",
+      "place": "Milan",
+      "country": "Italy",
+      "lat": 45.4642,
+      "lng": 9.19,
+      "purpose": [
+        "personal"
+      ],
+      "startTs": 1724889600000,
+      "start": "2024-08-29",
+      "endTs": null,
+      "end": null,
+      "ongoing": true
+    },
+    {
+      "id": "berlin-2024-09",
+      "place": "Berlin",
+      "country": "Germany",
+      "lat": 52.52,
+      "lng": 13.405,
+      "purpose": [
+        "personal"
+      ],
+      "startTs": 1726099200000,
+      "start": "2024-09-12",
+      "endTs": null,
+      "end": null,
+      "ongoing": true
+    },
+    {
+      "id": "berlin-2022-09",
+      "place": "Berlin",
+      "country": "Germany",
+      "lat": 52.52,
+      "lng": 13.405,
+      "purpose": [
+        "holiday"
+      ],
+      "startTs": 1727481600000,
+      "start": "2024-09-28",
+      "endTs": 1727568000000,
+      "end": "2024-09-29",
+      "ongoing": false
+    },
+    {
+      "id": "toulouse-2024-12",
+      "place": "Toulouse",
+      "country": "France",
+      "lat": 43.6047,
+      "lng": 1.4442,
+      "purpose": [
+        "personal"
+      ],
+      "startTs": 1735257600000,
+      "start": "2024-12-27",
+      "endTs": 1735603200000,
+      "end": "2024-12-31",
+      "ongoing": false
+    },
+    {
+      "id": "bogota-2025-04",
+      "place": "Bogotá",
+      "country": "Colombia",
+      "lat": 4.711,
+      "lng": -74.0721,
+      "purpose": [
+        "personal"
+      ],
+      "startTs": 1735603200000,
+      "start": "2024-12-31",
+      "endTs": 1745280000000,
+      "end": "2025-04-22",
+      "ongoing": false
+    },
+    {
+      "id": "rome-2025-04",
+      "place": "Rome",
+      "country": "Italy",
+      "lat": 41.9028,
+      "lng": 12.4964,
+      "purpose": [
+        "personal"
+      ],
+      "startTs": 1745280000000,
+      "start": "2025-04-22",
+      "endTs": 1745452800000,
+      "end": "2025-04-24",
+      "ongoing": false
+    },
+    {
+      "id": "new-york-2025-06",
+      "place": "New York City",
+      "country": "United States",
+      "lat": 40.7128,
+      "lng": -74.006,
+      "purpose": [
+        "personal"
+      ],
+      "startTs": 1748736000000,
+      "start": "2025-06",
+      "endTs": 1751328000000,
+      "end": "2025-07",
+      "ongoing": false
+    },
+    {
+      "id": "san-francisco-2025-06",
+      "place": "San Francisco",
+      "country": "United States",
+      "lat": 37.7749,
+      "lng": -122.4194,
+      "purpose": [
+        "personal"
+      ],
+      "startTs": 1748736000000,
+      "start": "2025-06",
+      "endTs": 1751328000000,
+      "end": "2025-07",
+      "ongoing": false
+    },
+    {
+      "id": "seattle-2025-06",
+      "place": "Seattle",
+      "country": "United States",
+      "lat": 47.6062,
+      "lng": -122.3321,
+      "purpose": [
+        "personal"
+      ],
+      "startTs": 1748736000000,
+      "start": "2025-06",
+      "endTs": 1751328000000,
+      "end": "2025-07",
+      "ongoing": false
+    },
+    {
+      "id": "los-angeles-2025-06",
+      "place": "Los Angeles",
+      "country": "United States",
+      "lat": 34.0522,
+      "lng": -118.2437,
+      "purpose": [
+        "personal"
+      ],
+      "startTs": 1748736000000,
+      "start": "2025-06",
+      "endTs": 1751328000000,
+      "end": "2025-07",
+      "ongoing": false
+    },
+    {
+      "id": "portland-2025-06",
+      "place": "Portland",
+      "country": "United States",
+      "lat": 45.5152,
+      "lng": -122.6784,
+      "purpose": [
+        "personal"
+      ],
+      "startTs": 1748736000000,
+      "start": "2025-06",
+      "endTs": 1751328000000,
+      "end": "2025-07",
+      "ongoing": false
+    },
+    {
+      "id": "koh-samui-2025-11",
+      "place": "Koh Samui",
+      "country": "Thailand",
+      "lat": 9.512,
+      "lng": 100.0136,
+      "purpose": [
+        "personal"
+      ],
+      "startTs": 1762732800000,
+      "start": "2025-11-10",
+      "endTs": 1763424000000,
+      "end": "2025-11-18",
+      "ongoing": false
+    },
+    {
+      "id": "singapore-2025-11",
+      "place": "Singapore",
+      "country": "Singapore",
+      "lat": 1.3521,
+      "lng": 103.8198,
+      "purpose": [
+        "personal"
+      ],
+      "startTs": 1763424000000,
+      "start": "2025-11-18",
+      "endTs": 1763596800000,
+      "end": "2025-11-20",
+      "ongoing": false
+    },
+    {
+      "id": "chicago-2026-01",
+      "place": "Chicago",
+      "country": "United States",
+      "lat": 41.8781,
+      "lng": -87.6298,
+      "purpose": [
+        "personal"
+      ],
+      "startTs": 1769644800000,
+      "start": "2026-01-29",
+      "endTs": null,
+      "end": null,
+      "ongoing": true
+    },
+    {
+      "id": "portland-2026-02",
+      "place": "Portland",
+      "country": "United States",
+      "lat": 45.5152,
+      "lng": -122.6784,
+      "purpose": [
+        "personal"
+      ],
+      "startTs": 1771804800000,
+      "start": "2026-02-23",
+      "endTs": 1772150400000,
+      "end": "2026-02-27",
+      "ongoing": false
+    },
+    {
+      "id": "san-francisco-2026-02",
+      "place": "San Francisco",
+      "country": "United States",
+      "lat": 37.7749,
+      "lng": -122.4194,
+      "purpose": [
+        "personal"
+      ],
+      "startTs": 1772150400000,
+      "start": "2026-02-27",
+      "endTs": 1772668800000,
+      "end": "2026-03-05",
+      "ongoing": false
+    },
+    {
+      "id": "tallinn-2026-03",
+      "place": "Tallinn",
+      "country": "Estonia",
+      "lat": 59.437,
+      "lng": 24.7536,
+      "purpose": [
+        "personal"
+      ],
+      "startTs": 1774483200000,
+      "start": "2026-03-26",
+      "endTs": 1774915200000,
+      "end": "2026-03-31",
+      "ongoing": false
+    },
+    {
+      "id": "amsterdam-2026-03",
+      "place": "Amsterdam",
+      "country": "Netherlands",
+      "lat": 52.3676,
+      "lng": 4.9041,
+      "purpose": [
+        "personal"
+      ],
+      "startTs": 1774915200000,
+      "start": "2026-03-31",
+      "endTs": null,
+      "end": null,
+      "ongoing": true
+    },
+    {
+      "id": "montreal-2026-05",
+      "place": "Montreal",
+      "country": "Canada",
+      "lat": 45.5019,
+      "lng": -73.5674,
+      "purpose": [
+        "personal"
+      ],
+      "startTs": 1780099200000,
+      "start": "2026-05-30",
+      "endTs": 1781222400000,
+      "end": "2026-06-12",
+      "ongoing": false
+    },
+    {
+      "id": "new-york-2026-06",
+      "place": "New York City",
+      "country": "United States",
+      "lat": 40.7128,
+      "lng": -74.006,
+      "purpose": [
+        "personal"
+      ],
+      "startTs": 1781222400000,
+      "start": "2026-06-12",
+      "endTs": 1782172800000,
+      "end": "2026-06-23",
+      "ongoing": false
+    },
+    {
+      "id": "berlin-2026-06",
+      "place": "Berlin",
+      "country": "Germany",
+      "lat": 52.52,
+      "lng": 13.405,
+      "purpose": [
+        "personal"
+      ],
+      "startTs": 1782172800000,
+      "start": "2026-06-23",
+      "endTs": 1783641600000,
+      "end": "2026-07-10",
+      "ongoing": false
+    },
+    {
+      "id": "lyon-2026-07",
+      "place": "Lyon",
+      "country": "France",
+      "lat": 45.764,
+      "lng": 4.8357,
+      "purpose": [
+        "personal"
+      ],
+      "startTs": 1783641600000,
+      "start": "2026-07-10",
+      "endTs": null,
+      "end": null,
+      "ongoing": true
+    }
+  ]
+}

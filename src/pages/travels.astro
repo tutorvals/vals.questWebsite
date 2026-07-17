@@ -1,0 +1,543 @@
+---
+import Base from '../layouts/Base.astro';
+import travels from '../data/travels.public.json';
+---
+
+<Base title="Travels - vals.quest" description="An interactive globe of the places Vals has stayed, over time." wide>
+  <div class="travels">
+    <div class="globe-wrap">
+      <div id="globe"></div>
+
+      <div class="info-card" id="info-card" hidden>
+        <div class="info-place" id="info-place"></div>
+        <div class="info-country" id="info-country"></div>
+        <div class="info-dates" id="info-dates"></div>
+        <div class="info-purpose" id="info-purpose"></div>
+        <div class="info-more" id="info-more" hidden></div>
+      </div>
+
+      <ul class="legend" aria-hidden="true">
+        <li><span class="dot" data-p="live"></span>live</li>
+        <li><span class="dot" data-p="work"></span>work</li>
+        <li><span class="dot" data-p="holiday"></span>holiday</li>
+        <li><span class="dot" data-p="personal"></span>personal</li>
+      </ul>
+
+      <div class="hint">drag to spin · scroll to zoom</div>
+    </div>
+
+    <div class="controls">
+      <button id="play" class="play" aria-label="Play timeline">▶</button>
+
+      <div class="scrub-col">
+        <input id="scrub" type="range" step="86400000" aria-label="Timeline" />
+        <div class="scrub-meta">
+          <span class="cursor-date" id="cursor-date"></span>
+          <span class="cursor-place" id="cursor-place"></span>
+        </div>
+      </div>
+
+      <div class="mode-toggle" role="group" aria-label="Timeline mode">
+        <button data-mode="cumulative" class="active">Cumulative</button>
+        <button data-mode="point">Point in time</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Build-time data, read at runtime by the module script below. -->
+  <script type="application/json" id="travels-data" set:html={JSON.stringify(travels)} is:inline
+  ></script>
+
+  <script>
+    import Globe from 'globe.gl';
+
+    // ---- data -------------------------------------------------------------
+    const data = JSON.parse(document.getElementById('travels-data').textContent);
+    const stays = data.stays; // already sorted by startTs
+    const { minTs, maxTs } = data;
+
+    const PURPOSE_COLORS = {
+      live: [88, 166, 255], // accent blue
+      work: [188, 140, 255], // purple
+      holiday: [63, 185, 80], // green
+      personal: [240, 136, 62], // orange
+      default: [139, 148, 158], // muted gray
+    };
+    const rgb = (c) => `rgb(${c[0]},${c[1]},${c[2]})`;
+    const rgba = (c, a) => `rgba(${c[0]},${c[1]},${c[2]},${a})`;
+    const colorOf = (stay) =>
+      PURPOSE_COLORS[stay.purpose?.[0]] ?? PURPOSE_COLORS.default;
+
+    // Effective end: an ongoing stay lasts until the next stay begins
+    // (or the end of the timeline if it's the latest).
+    stays.forEach((s, i) => {
+      const next = stays[i + 1];
+      s.effEnd = s.endTs ?? (next ? next.startTs : maxTs);
+    });
+
+    const fmtMonth = (ts) =>
+      new Date(ts).toLocaleDateString('en-GB', {
+        month: 'short',
+        year: 'numeric',
+        timeZone: 'UTC',
+      });
+    const fmtRange = (s) => {
+      if (!s.start) return s.end ?? '';
+      return `${s.start} → ${s.ongoing ? 'present' : s.end ?? '?'}`;
+    };
+
+    // ---- globe ------------------------------------------------------------
+    const el = document.getElementById('globe');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const globe = new Globe(el, { animateIn: !reduceMotion })
+      .backgroundColor('rgba(0,0,0,0)')
+      .globeImageUrl('/globe/earth-dark.jpg')
+      .bumpImageUrl('/globe/earth-topology.png')
+      .showAtmosphere(true)
+      .atmosphereColor('#58a6ff')
+      .atmosphereAltitude(0.18)
+      .pointLat('lat')
+      .pointLng('lng')
+      .pointAltitude((d) => d._alt)
+      .pointRadius((d) => d._radius)
+      .pointColor((d) => d._color)
+      .pointResolution(6)
+      .pointLabel(
+        (d) =>
+          `<div class="glabel"><b>${d.place}</b><br/>${d.country}<br/><span>${fmtRange(
+            d
+          )}</span></div>`
+      )
+      .onPointClick((d) => flyTo(d, 1.4))
+      .ringLat('lat')
+      .ringLng('lng')
+      .ringMaxRadius(4)
+      .ringPropagationSpeed(3)
+      .ringRepeatPeriod(900)
+      .ringColor((d) => (t) => rgba(colorOf(d), 1 - t))
+      .arcStartLat('sLat')
+      .arcStartLng('sLng')
+      .arcEndLat('eLat')
+      .arcEndLng('eLng')
+      .arcColor('color')
+      .arcStroke(0.5)
+      .arcAltitudeAutoScale(0.4)
+      .arcDashLength(0.4)
+      .arcDashGap(0.2)
+      .arcDashAnimateTime(reduceMotion ? 0 : 2500);
+
+    const controls = globe.controls();
+    controls.autoRotate = !reduceMotion;
+    controls.autoRotateSpeed = 0.35;
+    controls.enableDamping = true;
+
+    function sizeGlobe() {
+      globe.width(el.clientWidth).height(el.clientHeight);
+    }
+    sizeGlobe();
+    window.addEventListener('resize', sizeGlobe);
+
+    // ---- state / rendering ------------------------------------------------
+    let mode = 'cumulative';
+    let cursor = maxTs;
+    let flyTarget = null;
+
+    const scrub = document.getElementById('scrub');
+    scrub.min = String(minTs);
+    scrub.max = String(maxTs);
+    scrub.value = String(cursor);
+
+    function flyTo(stay, altitude = 1.7) {
+      if (!stay) return;
+      globe.pointOfView(
+        { lat: stay.lat, lng: stay.lng, altitude },
+        reduceMotion ? 0 : 900
+      );
+    }
+
+    function activeStays() {
+      // stays containing the cursor in their [startTs, effEnd] interval
+      return stays.filter((s) => cursor >= s.startTs && cursor <= s.effEnd);
+    }
+
+    function render() {
+      const active = activeStays();
+      const activeIds = new Set(active.map((s) => s.id));
+      // "primary" = latest-started active stay (for card + fly target)
+      const primary = active.length
+        ? active.reduce((a, b) => (b.startTs >= a.startTs ? b : a))
+        : null;
+
+      // which stays are shown, and how emphasised
+      const shown = [];
+      for (const s of stays) {
+        const isActive = activeIds.has(s.id);
+        let visible, emphasis;
+        if (mode === 'cumulative') {
+          visible = s.startTs <= cursor;
+          // fade with age: newest bright, older dimmer (floor 0.35)
+          const ageSpan = Math.max(1, cursor - minTs);
+          emphasis = isActive ? 1 : 0.35 + 0.5 * ((s.startTs - minTs) / ageSpan);
+        } else {
+          visible = isActive;
+          emphasis = 1;
+        }
+        if (!visible) continue;
+        const c = colorOf(s);
+        s._color = rgba(c, isActive ? 1 : Math.min(1, emphasis));
+        s._radius = isActive ? 0.55 : 0.28;
+        s._alt = isActive ? 0.055 : 0.012;
+        shown.push(s);
+      }
+
+      // arcs between consecutive shown stays (the travel path so far)
+      const arcs = [];
+      for (let i = 1; i < shown.length; i++) {
+        const a = shown[i - 1];
+        const b = shown[i];
+        arcs.push({
+          sLat: a.lat, sLng: a.lng, eLat: b.lat, eLng: b.lng,
+          color: [rgba(colorOf(a), 0.25), rgba(colorOf(b), 0.75)],
+        });
+      }
+
+      globe.pointsData(shown);
+      globe.ringsData(active);
+      globe.arcsData(arcs);
+
+      // fly to the active location when it changes
+      if (primary && primary.id !== flyTarget) {
+        flyTarget = primary.id;
+        flyTo(primary);
+      } else if (!primary) {
+        flyTarget = null;
+      }
+
+      updateInfo(primary, active.length);
+      updateReadout(primary);
+    }
+
+    // ---- info card + readout ---------------------------------------------
+    const card = document.getElementById('info-card');
+    const elPlace = document.getElementById('info-place');
+    const elCountry = document.getElementById('info-country');
+    const elDates = document.getElementById('info-dates');
+    const elPurpose = document.getElementById('info-purpose');
+    const elMore = document.getElementById('info-more');
+
+    function updateInfo(stay, count) {
+      if (!stay) {
+        card.hidden = true;
+        return;
+      }
+      card.hidden = false;
+      elPlace.textContent = stay.place;
+      elPlace.style.color = rgb(colorOf(stay));
+      elCountry.textContent = stay.country;
+      elDates.textContent = fmtRange(stay);
+      elPurpose.innerHTML = stay.purpose
+        .map((p) => {
+          const c = PURPOSE_COLORS[p] ?? PURPOSE_COLORS.default;
+          return `<span class="badge" style="border-color:${rgba(c, 0.6)};color:${rgb(
+            c
+          )}">${p}</span>`;
+        })
+        .join('');
+      if (count > 1) {
+        elMore.hidden = false;
+        elMore.textContent = `+${count - 1} more here now`;
+      } else {
+        elMore.hidden = true;
+      }
+    }
+
+    const elCursorDate = document.getElementById('cursor-date');
+    const elCursorPlace = document.getElementById('cursor-place');
+    function updateReadout(primary) {
+      elCursorDate.textContent = fmtMonth(cursor);
+      elCursorPlace.textContent = primary
+        ? `${primary.place}, ${primary.country}`
+        : '—';
+    }
+
+    // ---- timeline controls ------------------------------------------------
+    scrub.addEventListener('input', () => {
+      stopPlay();
+      cursor = Number(scrub.value);
+      render();
+    });
+
+    document.querySelectorAll('.mode-toggle button').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        mode = btn.dataset.mode;
+        document
+          .querySelectorAll('.mode-toggle button')
+          .forEach((b) => b.classList.toggle('active', b === btn));
+        flyTarget = null; // allow re-fly after mode switch
+        render();
+      });
+    });
+
+    // ---- autoplay ---------------------------------------------------------
+    const playBtn = document.getElementById('play');
+    let playing = false;
+    let rafId = null;
+    let lastT = 0;
+    const PLAY_DURATION_MS = 32000; // full timeline sweep
+
+    function step(now) {
+      if (!playing) return;
+      const dt = now - lastT;
+      lastT = now;
+      const speed = (maxTs - minTs) / PLAY_DURATION_MS;
+      cursor = Math.min(maxTs, cursor + dt * speed);
+      scrub.value = String(cursor);
+      render();
+      if (cursor >= maxTs) {
+        stopPlay();
+        return;
+      }
+      rafId = requestAnimationFrame(step);
+    }
+
+    function startPlay() {
+      playing = true;
+      playBtn.textContent = '❚❚';
+      playBtn.setAttribute('aria-label', 'Pause timeline');
+      controls.autoRotate = !reduceMotion;
+      if (cursor >= maxTs) cursor = minTs; // replay from the start
+      lastT = performance.now();
+      rafId = requestAnimationFrame(step);
+    }
+
+    function stopPlay() {
+      if (!playing) return;
+      playing = false;
+      playBtn.textContent = '▶';
+      playBtn.setAttribute('aria-label', 'Play timeline');
+      if (rafId) cancelAnimationFrame(rafId);
+    }
+
+    playBtn.addEventListener('click', () => (playing ? stopPlay() : startPlay()));
+
+    // ---- go ---------------------------------------------------------------
+    render();
+  </script>
+</Base>
+
+<style>
+  .travels {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .globe-wrap {
+    position: relative;
+    height: 68vh;
+    min-height: 460px;
+    overflow: hidden;
+    background:
+      radial-gradient(1px 1px at 20% 30%, rgba(255, 255, 255, 0.5), transparent),
+      radial-gradient(1px 1px at 70% 60%, rgba(255, 255, 255, 0.35), transparent),
+      radial-gradient(1px 1px at 40% 80%, rgba(255, 255, 255, 0.3), transparent),
+      radial-gradient(1px 1px at 85% 20%, rgba(255, 255, 255, 0.4), transparent),
+      radial-gradient(circle at 50% 45%, #0e1726 0%, #05070c 75%);
+  }
+
+  #globe {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* globe.gl tooltip */
+  :global(.glabel) {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    background: rgba(13, 17, 23, 0.92);
+    border: 1px solid var(--bg-alt);
+    border-radius: 6px;
+    padding: 0.4rem 0.6rem;
+    color: var(--text);
+  }
+  :global(.glabel span) {
+    color: var(--text-muted);
+  }
+
+  .info-card {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: rgba(13, 17, 23, 0.82);
+    border: 1px solid var(--bg-alt);
+    border-radius: 8px;
+    padding: 0.75rem 0.9rem;
+    max-width: 15rem;
+    backdrop-filter: blur(4px);
+    pointer-events: none;
+  }
+  .info-place {
+    font-size: 1.15rem;
+    font-weight: bold;
+    line-height: 1.2;
+  }
+  .info-country {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+  .info-dates {
+    margin-top: 0.35rem;
+    font-size: 0.8rem;
+    color: var(--text);
+  }
+  .info-purpose {
+    margin-top: 0.4rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  }
+  .info-purpose .badge {
+    font-size: 0.7rem;
+    border: 1px solid;
+    border-radius: 999px;
+    padding: 0.05rem 0.5rem;
+  }
+  .info-more {
+    margin-top: 0.4rem;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+  }
+
+  .legend {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem 0.7rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem 0.8rem;
+    background: rgba(13, 17, 23, 0.6);
+    border-radius: 8px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+  .legend li {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin: 0;
+  }
+  .legend .dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .legend .dot[data-p='live'] { background: rgb(88, 166, 255); }
+  .legend .dot[data-p='work'] { background: rgb(188, 140, 255); }
+  .legend .dot[data-p='holiday'] { background: rgb(63, 185, 80); }
+  .legend .dot[data-p='personal'] { background: rgb(240, 136, 62); }
+
+  .hint {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
+  /* controls bar */
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    background: var(--bg-alt);
+    border-top: 1px solid #21262d;
+    flex-wrap: wrap;
+  }
+
+  .play {
+    flex: none;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 50%;
+    border: 1px solid var(--accent);
+    background: transparent;
+    color: var(--accent);
+    font-size: 0.9rem;
+    cursor: pointer;
+    font-family: var(--font-mono);
+    transition: background 0.15s, color 0.15s;
+  }
+  .play:hover {
+    background: var(--accent);
+    color: var(--bg);
+  }
+
+  .scrub-col {
+    flex: 1 1 320px;
+    min-width: 240px;
+  }
+  #scrub {
+    width: 100%;
+    accent-color: var(--accent);
+    cursor: pointer;
+  }
+  .scrub-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 0.3rem;
+    font-size: 0.82rem;
+  }
+  .cursor-date {
+    color: var(--accent);
+    font-weight: bold;
+  }
+  .cursor-place {
+    color: var(--text-muted);
+    text-align: right;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .mode-toggle {
+    display: flex;
+    flex: none;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .mode-toggle button {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    padding: 0.45rem 0.8rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
+  .mode-toggle button.active {
+    background: var(--accent);
+    color: var(--bg);
+  }
+
+  @media (max-width: 600px) {
+    .globe-wrap {
+      height: 58vh;
+      min-height: 360px;
+    }
+    .controls {
+      padding: 0.9rem 1rem;
+    }
+    .mode-toggle {
+      order: 3;
+    }
+  }
+</style>

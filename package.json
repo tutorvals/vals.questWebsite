@@ -6,9 +6,15 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "build:travels": "node scripts/build-travels.mjs"
   },
   "dependencies": {
-    "astro": "^5.17.1"
+    "astro": "^5.17.1",
+    "globe.gl": "^2.44.0",
+    "three": "^0.180.0"
+  },
+  "devDependencies": {
+    "js-yaml": "^4.1.0"
   }
 }
