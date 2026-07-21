@@ -5,6 +5,7 @@
   --text-muted: #8b949e;
   --accent: #58a6ff;
   --accent-hover: #79b8ff;
+  --accent-soft: #a5d6ff;
   --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Menlo', 'Consolas', monospace;
   --max-width: 800px;
 }
@@ -51,7 +52,7 @@ h1, h2, h3 {
 
 h1 { font-size: 1.6rem; }
 h2 { font-size: 1.25rem; color: var(--accent); }
-h3 { font-size: 1.1rem; color: var(--text-muted); }
+h3 { font-size: 1.1rem; color: var(--accent-soft); }
 
 p {
   margin-bottom: 1rem;
