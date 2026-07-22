@@ -96,6 +96,16 @@ hr {
   margin: 2rem 0;
 }
 
+/* Images in page content: centered, capped well inside the column.
+   Sources are ~2x this width, so they stay crisp on high-DPI screens. */
+main img {
+  max-width: min(100%, 500px);
+  height: auto;
+  display: block;
+  margin: 1.5rem auto;
+  border-radius: 4px;
+}
+
 /* Nav */
 nav {
   max-width: var(--max-width);
