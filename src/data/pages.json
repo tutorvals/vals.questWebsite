@@ -1,0 +1,56 @@
+[
+  {
+    "href": "/meet",
+    "label": "Get in touch",
+    "blurb": "book a call / work with me",
+    "nav": "Meet"
+  },
+  {
+    "href": "/activities",
+    "label": "Activity menu",
+    "blurb": "things I like doing",
+    "nav": "Activities"
+  },
+  {
+    "href": "/conversations",
+    "label": "Conversation menu",
+    "blurb": "things I like talking about",
+    "nav": "Conversations"
+  },
+  {
+    "href": "/manifesto",
+    "label": "2026 Manifesto",
+    "blurb": "current visions",
+    "nav": "Manifesto"
+  },
+  {
+    "href": "/rpg",
+    "label": "Roleplay games",
+    "blurb": "systems I GM"
+  },
+  {
+    "href": "/hireme",
+    "label": "Hire a Vals",
+    "blurb": "what I do & how to compensate",
+    "nav": "Hire"
+  },
+  {
+    "href": "/reading",
+    "label": "Reading",
+    "blurb": "what I'm reading"
+  },
+  {
+    "href": "/travels",
+    "label": "Travels",
+    "blurb": "a globe of the places I've stayed",
+    "nav": "Travels",
+    "hidden": true
+  },
+  {
+    "href": "/vibes",
+    "label": "Vibes",
+    "blurb": "a collage of images I vibe with",
+    "nav": "Vibes",
+    "hidden": true
+  }
+]

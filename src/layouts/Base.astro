@@ -1,9 +1,12 @@
 ---
+import pages from '../data/pages.json';
+
 interface Props {
   title?: string;
   description?: string;
   wide?: boolean;
-  frontmatter?: { title?: string; description?: string };
+  explore?: boolean;
+  frontmatter?: { title?: string; description?: string; explore?: boolean };
 }
 
 // Markdown pages pass title/description via frontmatter; .astro pages pass them directly
@@ -12,6 +15,15 @@ const title = Astro.props.title ?? fm.title ?? 'vals.quest';
 const description = Astro.props.description ?? fm.description ?? "Vals' personal website";
 // `wide` lets a page (e.g. the travels globe) break out of the 800px column.
 const wide = Astro.props.wide ?? false;
+// `explore: true` appends the full site index (from pages.json) after the page body.
+const explore = Astro.props.explore ?? fm.explore ?? false;
+
+// src/data/pages.json is the single source of truth for internal links.
+// `hidden: true` unlists a page (it still builds and works by direct URL);
+// to un-publish entirely, rename the file in src/pages/ with a leading `_`.
+const listed = pages.filter((p) => !p.hidden);
+// Only pages with a `nav` label go in the header; the rest live in Explore only.
+const navPages = listed.filter((p) => p.nav);
 ---
 
 <html lang="en">
@@ -29,17 +41,21 @@ const wide = Astro.props.wide ?? false;
       <a class="site-name" href="/">vals.quest</a>
       <ul class="nav-links">
         <li><a href="/">Home</a></li>
-        <li><a href="/manifesto">Manifesto</a></li>
-        <li><a href="/meet">Meet</a></li>
-        <li><a href="/hireme">Hire</a></li>
-        <li><a href="/activities">Activities</a></li>
-        <li><a href="/conversations">Conversations</a></li>
-        <li><a href="/travels">Travels</a></li>
-        <li><a href="/vibes">Vibes</a></li>
+        {navPages.map((p) => <li><a href={p.href}>{p.nav}</a></li>)}
       </ul>
     </nav>
     <main class={wide ? 'wide' : undefined}>
       <slot />
+      {explore && (
+        <section class="explore">
+          <h2>Explore</h2>
+          <ul>
+            {listed.map((p) => (
+              <li><a href={p.href}>{p.label}</a> — {p.blurb}</li>
+            ))}
+          </ul>
+        </section>
+      )}
     </main>
     <footer>
       <ul class="contact-links">

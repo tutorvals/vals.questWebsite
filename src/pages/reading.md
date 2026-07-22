@@ -19,7 +19,7 @@ General notes on reading books. I don't "recommend" any book in particular unles
 ### General psychology
 
 - The Great Psychotherapy Debate
-- The 3 Faces of Victim
+- [The 3 Faces of Victim](https://www.lynneforrest.com/articles/2008/06/the-faces-of-victim/)
 
 ### General psychiatry
 
