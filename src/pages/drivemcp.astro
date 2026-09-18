@@ -1,0 +1,252 @@
+---
+// Standalone page, deliberately not using ../layouts/Base.astro:
+// no site nav, footer or global.css. Unlisted in src/data/pages.json.
+// The #privacy and #terms anchors are meant to be linkable on their own
+// (e.g. from a Google OAuth consent screen).
+const updated = '18 September 2026';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Drive MCP</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --fg: #1a1a1a;
+        --muted: #555;
+        --bg: #fdfdfb;
+        --accent: #2b5797;
+        --rule: #e2e2dd;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --fg: #e8e8e4;
+          --muted: #a9a9a4;
+          --bg: #16161a;
+          --accent: #8ab4f8;
+          --rule: #33333a;
+        }
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        padding: 3rem 1.25rem 4rem;
+        background: var(--bg);
+        color: var(--fg);
+        font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      }
+      main { max-width: 42rem; margin: 0 auto; }
+      h1 { font-size: 1.9rem; line-height: 1.2; margin: 0 0 0.4rem; }
+      h2 {
+        font-size: 1.15rem;
+        margin: 2.4rem 0 0.6rem;
+        padding-top: 1.2rem;
+        border-top: 1px solid var(--rule);
+      }
+      h3 { font-size: 1rem; margin: 1.4rem 0 0.4rem; }
+      .sub { color: var(--muted); margin: 0 0 2rem; }
+      a { color: var(--accent); }
+      ul { padding-left: 1.2rem; }
+      li { margin: 0.35rem 0; }
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.9em;
+        background: color-mix(in srgb, var(--fg) 8%, transparent);
+        padding: 0.1em 0.35em;
+        border-radius: 3px;
+      }
+      .note {
+        border-left: 3px solid var(--rule);
+        padding: 0.1rem 0 0.1rem 1rem;
+        color: var(--muted);
+      }
+      .updated { color: var(--muted); font-size: 0.9rem; margin: 0 0 1rem; }
+      footer {
+        margin-top: 3rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--rule);
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Drive MCP</h1>
+      <p class="sub">A Google Workspace MCP server — Drive, Docs and Sheets for an AI assistant.</p>
+
+      <p>
+        MCP (Model Context Protocol) is the standard way to give an AI assistant access to
+        tools and data. The Google Workspace MCP server exposes your own Google account to an
+        assistant like Claude: it can search Drive, read and write Docs, edit Sheets, and so
+        on, through Google's own OAuth rather than through any third party.
+      </p>
+
+      <h2>The original project</h2>
+      <p>
+        I did not write this. All the code lives at
+        <a href="https://github.com/taylorwilsdon/google_workspace_mcp">github.com/taylorwilsdon/google_workspace_mcp</a>
+        — that's the place to read the source, check the license, open issues, and get
+        current setup instructions. I'd encourage you to read it before running it.
+      </p>
+
+      <h2>How this works</h2>
+      <p>
+        I set up a Google Cloud Platform project for my own personal use of this MCP server.
+        A GCP project is what issues the OAuth client that the server uses to ask Google for
+        access to an account. If you use that OAuth client too, Google will show you my
+        project's name on the consent screen — which is why this page exists.
+      </p>
+      <p>
+        What matters is where things actually run:
+      </p>
+      <ul>
+        <li>You install and run the MCP server <strong>on your own machine</strong>, as a local server.</li>
+        <li>You sign in with <strong>your own Google account</strong> and grant it access to <strong>your own</strong> Drive, Docs and Sheets.</li>
+        <li>Your files and tokens go <strong>directly between your machine and Google</strong>. They never pass through me, and I don't run any server that receives them.</li>
+      </ul>
+      <p>
+        I'm not operating a hosted service. There's no endpoint here to point a client at, no
+        account to create, and nothing of yours on any machine of mine.
+      </p>
+      <p>
+        You can just as well create your own GCP project and your own OAuth client — that's
+        the cleanest option, and it means you depend on nothing of mine at all.
+      </p>
+
+      <h2 id="privacy">Privacy policy</h2>
+      <p class="updated">Last updated: {updated}</p>
+
+      <h3>What I collect</h3>
+      <p>
+        Nothing. I don't operate a server, database or analytics for this. I do not collect,
+        receive, store, log, process, sell or share any of your data, including your Google
+        account data, your Google user data, your files, your OAuth tokens, or your usage of
+        the MCP server.
+      </p>
+
+      <h3>Where your data goes</h3>
+      <p>
+        The MCP server runs locally on your own computer. When you authorise it, Google issues
+        credentials to that local copy, and it talks to Google's APIs directly from your machine.
+        Your Drive, Docs and Sheets content is exchanged between your computer and Google only.
+        I have no access to it and no technical means of obtaining it.
+      </p>
+      <p>
+        Your OAuth tokens are stored locally by the software, on your own machine, under your
+        control. Keeping that machine secure is up to you.
+      </p>
+
+      <h3>Third parties</h3>
+      <p>
+        Your use of Google's services is governed by
+        <a href="https://policies.google.com/privacy">Google's Privacy Policy</a> and
+        <a href="https://policies.google.com/terms">Terms of Service</a>. If you connect the
+        MCP server to an AI assistant, whatever content you choose to send to that assistant is
+        governed by that assistant provider's own policies. Consider what you're exposing before
+        you point a model at your Drive.
+      </p>
+
+      <h3>Google API Services User Data Policy</h3>
+      <p>
+        Use of information received from Google APIs adheres to the
+        <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>,
+        including the Limited Use requirements. Since no Google user data reaches me at all,
+        none of it is used for any purpose, transferred to anyone, or used to train any model.
+      </p>
+
+      <h3>Revoking access</h3>
+      <p>
+        You can withdraw access at any time at
+        <a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a>,
+        and delete the locally stored credentials from your machine. Neither action requires
+        anything from me.
+      </p>
+
+      <h3>Children</h3>
+      <p>This is not intended for use by anyone under 13.</p>
+
+      <h3>Changes</h3>
+      <p>
+        If this policy changes, the updated version will appear on this page with a new date.
+      </p>
+
+      <h3>Contact</h3>
+      <p>
+        Questions: <a href="mailto:tutor.vals@gmail.com">tutor.vals@gmail.com</a>.
+      </p>
+
+      <h2 id="terms">Terms of service</h2>
+      <p class="updated">Last updated: {updated}</p>
+
+      <h3>What's on offer</h3>
+      <p>
+        I make a Google Cloud OAuth client available so that you can, if you want, run the
+        open-source Google Workspace MCP server on your own machine against your own Google
+        account. That's the whole of it. I do not provide the software (see the repository
+        above), I do not host a service, and I do not provide support.
+      </p>
+
+      <h3>Your responsibilities</h3>
+      <ul>
+        <li>You run the software on your own equipment and are responsible for what it does there.</li>
+        <li>You only authorise access to accounts and data you're entitled to access.</li>
+        <li>You comply with Google's terms and with any laws that apply to you.</li>
+        <li>You secure your own machine and your own credentials.</li>
+        <li>You don't use this to break into anything, to abuse Google's APIs, or to do anything illegal.</li>
+      </ul>
+
+      <h3>No warranty</h3>
+      <p>
+        Everything here is provided as-is and as-available, with no warranty of any kind,
+        express or implied, including fitness for a particular purpose. It may break, change or
+        stop working at any time.
+      </p>
+
+      <h3>Limitation of liability</h3>
+      <p>
+        To the fullest extent permitted by law, I'm not liable for any damages arising from
+        your use of the MCP server or of the OAuth client — including lost, corrupted or
+        exposed data. An AI assistant with write access to your Drive can delete or overwrite
+        your files. Keep backups, and grant only the access you actually need.
+      </p>
+
+      <h3>Availability and termination</h3>
+      <p>
+        I may change, restrict or withdraw the OAuth client at any time, without notice, for
+        any reason — including simply because I've stopped using it myself. If that happens you
+        can create your own GCP project and carry on unaffected. You can stop using it at any
+        time by revoking access and deleting your local credentials.
+      </p>
+
+      <h3>The software's own licence</h3>
+      <p>
+        The MCP server is somebody else's open-source project. Its licence, in its repository,
+        governs the code itself; nothing here modifies it.
+      </p>
+
+      <h3>Governing law</h3>
+      <p>These terms are governed by French law.</p>
+
+      <h3>Contact</h3>
+      <p>
+        <a href="mailto:tutor.vals@gmail.com">tutor.vals@gmail.com</a>.
+      </p>
+
+      <h2>Before you run it</h2>
+      <p class="note">
+        This hands an AI assistant real read and write access to your Google account. Keep the
+        server bound to localhost, grant the narrowest set of scopes that does the job, and
+        review which write tools your client is allowed to call. Read the code yourself — that's
+        the point of it being open.
+      </p>
+
+      <footer>
+        <a href="/">vals.quest</a>
+      </footer>
+    </main>
+  </body>
+</html>
